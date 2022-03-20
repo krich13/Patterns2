@@ -1,15 +1,15 @@
 package ru.netology.data;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
 @Data
-@NoArgsConstructor
+@Value
 public class BankData {
 
-   private String login;
-   private  String password;
-   private String status;
+    private String login;
+    private String password;
+    private String status;
 
 }
 

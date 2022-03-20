@@ -5,7 +5,6 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import ru.netology.data.BankData;
-import ru.netology.data.DataGenerator;
 
 import static io.restassured.RestAssured.given;
 
@@ -19,7 +18,7 @@ public class SendData {
                 .build();
 
 
-        static void sendUser(BankData newUser) {
+        public static void sendUser(BankData newUser) {
            given()
                     .spec(requestSpec)
                     .body(newUser)

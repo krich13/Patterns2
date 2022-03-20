@@ -1,13 +1,13 @@
 package ru.netology.data;
 
 import com.github.javafaker.Faker;
+import ru.netology.SendData;
 
 import java.util.Locale;
 
 public class DataGenerator {
 
     private static Faker faker = new Faker(new Locale("ru"));
-    private static String[] status = {"active", "blocked"};
 
     private static String generateName() {
         return faker.name().username();
@@ -15,33 +15,28 @@ public class DataGenerator {
     }
 
     private static String generatePassword() {
-
         return faker.internet().password();
     }
 
+    public static BankData generateUser(String status) {
+        return new BankData(generateName(), generatePassword(), status);
+    }
 
-    public static BankData generateActiveUser() {
-        BankData user = new BankData();
-        user.setPassword(DataGenerator.generatePassword());
-        user.setLogin(DataGenerator.generateName());
-        user.setStatus(status[0]);
+    public static BankData generateRegisteredUser(String status) {
+        BankData user = generateUser(status);
         return user;
     }
 
-    public static BankData generateBlockedUser() {
-        BankData user = generateActiveUser();
-        user.setStatus(status[1]);
-        return user;
+    public static BankData generateUserWithNewPassword(BankData user) {
+        return new BankData(user.getLogin(), generatePassword(), user.getStatus());
     }
 
-    public static BankData generateUserWithNewPassword(BankData newUser) {
-        newUser.setPassword(DataGenerator.generatePassword());
-        return newUser;
+    public static BankData generateUserWithNewLogin(BankData user) {
+        return new BankData(generateName(), user.getPassword(), user.getStatus());
     }
 
-     public static BankData generateUserWithNewStatus (BankData newUser) {
-        newUser.setStatus(status[1]);
-         return newUser;
-     }
-
+    public static BankData generateUserWithNewStatus(BankData user, String status) {
+        return new BankData(user.getLogin(), user.getPassword(), status);
+    }
 }
+
